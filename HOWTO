@@ -1,0 +1,111 @@
+#!/bin/bash
+# The `bash HOWTO` command, given at the command line within the `mdgBookSVG7Kit-main` directory
+# in your computer, will automatically carry out the following steps leading to the creation of the 
+# collection book: `mdgBookSVG7v1.pdf`.
+# 
+# Create three sub-folders: `bin`, `images`, `res`, under the `mdgBookSVG7-main` directory
+#		`bin` - folder for Bash files: mdg47mid+svg.sh, mdg72midRndN-svg.sh, mdgEntriesSVG2.sh
+#		`images` - folder for image files for book cover/title page: 1ed.png, FrontCover.pdf
+# 	`res` - folder for ABC, SVG, PDF output files; initially contains: 
+#		0TAB*.pdf - crosstables for two-dice outcomes vs. measure numbers of the rondo parts
+#		calegari-ariettas.abc - table of measures for the ariettas for the four parts of the rondo
+#		calegari-ritornellos.abc - table of measures for the minuets 
+#		hyperref.cfg - file containing the \hypersetup{} keyvalues for the \hyperref pkg
+#		mdg7.bib - bibliography file for the book
+#		mdgBookSVG7v1.tex - main LaTeX file for book 
+#		mdgBookSVG7v1-cover.tex - LaTeX file for cover page
+
+	mkdir bin images res
+	mv *.sh bin
+	mv 1ed.png images; mv FrontCover.pdf images
+	mv 0TAB*.pdf res; mv calegari-*.abc res
+	mv hyperref.cfg res; mv mdg7.bib res
+	mv *.tex res
+
+# Change directory res folder then, for each  Bash file in `bin`, create a link 
+# from `bib` to `res`
+
+	cd res 
+	ln -s ../bin/*.sh . 
+
+# Within `res` directory, generate nnn MDGs (nnn is number of MDG minuet-trios in book to be created)
+# For 250 minuets to be generated: nnn=250. Here we generate 20 
+
+	./mdg72midRndN+svg.sh 20
+
+# Generate a list of SVGs created by the previous step:
+
+	ls --color=never acg5-*.svg > svgList.txt
+
+# Create a list of figure entries for LaTeX file; *.pdf_tex files are also created using inkscape
+
+	./mdgEntriesSVG2.sh svgList.txt
+
+# Change the font sizes of titles and subtitles in each acg5-*.pdf_tex file
+
+	sed -i 's/\\textbf{acg5/\\footnotesize \\tt {acg5/g' acg5-*.pdf_tex
+	sed -i 's/\\textbf{:/\\footnotesize \\tt {:/g' acg5-*.pdf_tex
+	sed -i 's/\\textbf{Perm\./\\footnotesize \\tt {Perm\.\\/' acg5-*.pdf_tex
+	sed -i 's/(AR)2\.(BAR)2\.(CAR)2\.(BDAR)2/\\small \\tt Order for Playing Parts: (AR)2\.(BAR)2\.(CAR)2\.(BDAR)2/' acg5-*.pdf_tex
+	sed -i 's/{l}A\\end/{l} \\tt A\\end/g' acg5-*.pdf_tex
+	sed -i 's/{l}R\\end/{l}\\tt R\\end/g' acg5-*.pdf_tex
+	sed -i 's/{l}D\\end/{l}\\tt D\\end/g' acg5-*.pdf_tex
+	sed -i 's/{l}B\\end/{l}\\tt B\\end/g' acg5-*.pdf_tex
+	sed -i 's/{l}C\\end/{l}\\tt C\\end/g' acg5-*.pdf_tex
+	sed -i 's/\\textbf{= 120/\\footnotesize \\tt {= 120/' acg5-*.pdf_tex
+	sed -i 's/\[t\]{c}\\textit{3}/\[t\]{c}\\textit{\\scriptsize 3}/g' acg5-*.pdf_tex
+
+# Move svgList.txt.output to svgList.tex
+
+	cp svgList.txt.output svgList.tex
+
+# Remove trailing `001` from each svgList.tex entry 
+
+	sed -i.OLD 's/001}/}/g' svgList.tex
+	sed -i.OLD 's/001.mid}/.mid}/g' svgList.tex
+
+# Create SVGs for the calegari-ariettas.pdf/calegari-ritornellos.pdf (tables of measures); 
+# also corresponding *pdf_tex files using inkscape
+
+	abcm2ps -v -O= calegari-ariettas.abc
+	inkscape --export-filename=calegari-ariettas001.pdf --export-area-drawing --export-latex calegari-ariettas001.svg
+	inkscape --export-filename=calegari-ariettas002.pdf --export-area-drawing --export-latex calegari-ariettas002.svg
+	inkscape --export-filename=calegari-ariettas003.pdf --export-area-drawing --export-latex calegari-ariettas003.svg
+	inkscape --export-filename=calegari-ariettas004.pdf --export-area-drawing --export-latex calegari-ariettas004.svg
+	inkscape --export-filename=calegari-ariettas005.pdf --export-area-drawing --export-latex calegari-ariettas005.svg
+	inkscape --export-filename=calegari-ariettas006.pdf --export-area-drawing --export-latex calegari-ariettas006.svg
+	inkscape --export-filename=calegari-ariettas007.pdf --export-area-drawing --export-latex calegari-ariettas007.svg
+	inkscape --export-filename=calegari-ariettas008.pdf --export-area-drawing --export-latex calegari-ariettas008.svg
+	inkscape --export-filename=calegari-ariettas009.pdf --export-area-drawing --export-latex calegari-ariettas009.svg
+	
+	abcm2ps -v -O= calegari-ritornellos.abc
+	inkscape --export-filename=calegari-ritornellos001.pdf --export-area-drawing --export-latex calegari-ritornellos001.svg
+	inkscape --export-filename=calegari-ritornellos002.pdf --export-area-drawing --export-latex calegari-ritornellos002.svg
+	inkscape --export-filename=calegari-ritornellos003.pdf --export-area-drawing --export-latex calegari-ritornellos003.svg
+
+##	add \url{---}for URL; change to scriptsize
+
+	sed -i.OLD '/put(0.31773628,1.28500584)/s/\\textit{3}/\\textit{${}$3}/' calegari-ariettas001.pdf_tex
+	sed -i.OLD 's/\[from http/\\scriptsize\[from \\url{http/g' calegari-ariettas001.pdf_tex
+	sed -i.OLD 's/31c.pdf\]/31c.pdf}\]/g' calegari-ariettas001.pdf_tex
+
+	sed -i.OLD '/put(0.28950565,1.22414527)/s/\\textit{3}/\\textit{${}$3}/' calegari-ritornellos001.pdf_tex
+	sed -i.OLD 's/\[from http/\\scriptsize\[from \\url{http/g' calegari-ritornellos001.pdf_tex
+	sed -i.OLD 's/31c.pdf\]/31c.pdf}\]/g' calegari-ritornellos001.pdf_tex
+
+##	- add "\scriptsize" before every 3-plet" 
+##	- change font for measure numbers from italics (it) to typewriter (tt) 
+
+	sed -i.OLD 's/\[t\]{c}\\textit{3}/\[t\]{c}\\textit{\\scriptsize 3}/g' calegari-*.pdf_tex
+	sed -i.OLD 's/\[t\]{l}\\textit{/\[t\]{c}\\texttt{\\footnotesize /g' calegari-*.pdf_tex
+
+# Generate the PDF
+
+	pdflatex -synctex=1 -interaction=nonstopmode -shell-escape mdgBookSVG7v1.tex
+	bibtex mdgBookSVG7v1.aux
+	pdflatex -synctex=1 -interaction=nonstopmode -shell-escape mdgBookSVG7v1.tex
+	pdflatex -synctex=1 -interaction=nonstopmode -shell-escape mdgBookSVG7v1.tex
+
+###
+##
+#
