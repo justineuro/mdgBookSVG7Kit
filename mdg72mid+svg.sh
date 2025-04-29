@@ -305,7 +305,7 @@ Q:1/8=120
 P:(AR)2.(BAR)2.(CAR)2.(BDAR)2
 %%staves [1 2 3 4]
 V:1 clef=alto1
-V:2 clef=alto2
+V:2 clef=alto1
 V:3 clef=treble
 V:4 clef=bass
 K:F
