@@ -2,7 +2,7 @@
 
 **Here's an opportunity for one to "compose" Rondos and to author a Collection Book of such!!!**  
 
-![](./acg5-rondo.png)
+![](./acg5-rondo-450.png)
 
 [Audio: &nbsp; [ogg](https://justineuro.github.io/mdgBookSVG7Kit/audio-samples/acg5-2-8-10-8-5-8-11-8-2-7-7-6-7-12-11-6-2-2-7-7-10-7-4-3-3-12-10-8-6-6-2-12.ogg) &nbsp;&nbsp; [midi](./audio-samples/acg5-2-8-10-8-5-8-11-8-2-7-7-6-7-12-11-6-2-2-7-7-10-7-4-3-3-12-10-8-6-6-2-12.mid)]  
 (Additional sample `midi` and `ogg` audio may be found in the [`audio-samples`](./audio-samples) folder of this repository.)
@@ -31,7 +31,7 @@ To personalize one's generated book (in addition to the randomly generated rondo
 - `mdgBookSVG7v1-cover.tex`- makes the cover of the book; see lines 37-47 of `mdgBookSVG7v1.tex` for default values
 - `hyperref.cfg` - contains the `\hypersetup` keyvalues; one may wish to change the default value of `pdfauthor`, among other keyvalues; see the documentation for the TeX package `hyperref` for more information on these keyvalues
 
-Once the desired changes have been made to the files above, one can then re-compile the book by issuing, in the `res` subdirectoy, the last set of commands in the HOWTO file:
+Once the desired changes have been made to the files above, one can then re-compile the book by issuing, in the `res` subdirectory, the last set of commands in the HOWTO file:
 ```shell
 pdflatex -synctex=1 -interaction=nonstopmode -shell-escape mdgBookSVG7v1.tex
 bibtex mdgBookSVG7v1.aux
