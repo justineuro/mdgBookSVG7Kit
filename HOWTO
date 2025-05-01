@@ -77,6 +77,10 @@
 	inkscape --export-filename=calegari-ariettas007.pdf --export-area-drawing --export-latex calegari-ariettas007.svg
 	inkscape --export-filename=calegari-ariettas008.pdf --export-area-drawing --export-latex calegari-ariettas008.svg
 	inkscape --export-filename=calegari-ariettas009.pdf --export-area-drawing --export-latex calegari-ariettas009.svg
+	inkscape --export-filename=calegari-ariettas010.pdf --export-area-drawing --export-latex calegari-ariettas006.svg
+	inkscape --export-filename=calegari-ariettas011.pdf --export-area-drawing --export-latex calegari-ariettas007.svg
+	inkscape --export-filename=calegari-ariettas012.pdf --export-area-drawing --export-latex calegari-ariettas008.svg
+	inkscape --export-filename=calegari-ariettas013.pdf --export-area-drawing --export-latex calegari-ariettas009.svg
 	
 	abcm2ps -v -O= calegari-ritornellos.abc
 	inkscape --export-filename=calegari-ritornellos001.pdf --export-area-drawing --export-latex calegari-ritornellos001.svg
