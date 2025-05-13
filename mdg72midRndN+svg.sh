@@ -13,21 +13,21 @@
 #		"L'art de composer de la musique sans en connaître les éléments"
 #
 #      AUTHOR:	J.L.A. Uro (justineuro@gmail.com)
-#     VERSION:	0.0.0
+#     VERSION:	0.0.1
 #     LICENSE:	Creative Commons Attribution 4.0 International License (CC-BY)
 #     CREATED:	2025/04/24 16:44:02
-#    REVISION:	
+#    REVISION:	2025/05/13 11:05:22
 #==================================================================================
 
 #----------------------------------------------------------------------------------
 # define the function genS() that randomly chooses an integer from 1 to 6, inclusive
 #----------------------------------------------------------------------------------
-genS() { # RANDOM randomly generates an integer from 0 to 32765
-	rnd=32758
-	until [ $rnd -lt 32758 ]
+genS() { # RANDOM randomly generates an integer from 0 to 32767
+	rnd=32768
+	until [ $rnd -lt 32766 ]
 	do
 		rnd=$[RANDOM]
-		if [ $rnd -lt 32758 ]; then echo $[rnd%11+2]; fi
+		if [ $rnd -lt 32766 ]; then echo $[rnd%6+1]; fi
 	done
 }
 
@@ -55,7 +55,7 @@ while [ $i -le $1 ]; do
 #							(measures from Tables 1, cols 9-12)
 #----------------------------------------------------------------------------------
 	for j in {0..31}; do
-		diceR[$j]=`genS`
+		diceR[$j]=$((`genS` + `genS`))
 	done
 echo ${diceR[*]}
 	
