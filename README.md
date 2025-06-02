@@ -9,7 +9,7 @@
 
 This folder contains materials that allow the user to author a book containing a collection of [Musical Dice Games (MDG)](https://en.wikipedia.org/wiki/Musikalisches_W%C3%BCrfelspiel) rondos, generated based on the rules given in Antonio Callegari's [*L'art de composer de la musique sans en connaître les éléments  2nd Ed. (1802)*](https://imslp.org/wiki/L'art_de_composer_de_la_musique_sans_en_conna%C3%AEtre_les_%C3%A9l%C3%A9ments_(Calegari%2C_Antonio)).  
 
-To creat a book, simply [download](https://github.com/justineuro/mdgBookSVG7Kit/archive/main.zip) (or clone: `git clone https://github.com/justineuro/mdgBookSVG7Kit.git`) this project to one's computer, unzip the downloaded archive, and at the command line inside the main folder (`mdgBookSVG7Kit` or `mdgBookSVG7Kit-main` directory) issue the following command (pre-requisites: `bash`, `abcmidi`, `abcm2ps`, `Ghostscript`, `Inkscape`, and `LaTeX`):
+To create a book, simply [download](https://github.com/justineuro/mdgBookSVG7Kit/archive/main.zip) (or clone: `git clone https://github.com/justineuro/mdgBookSVG7Kit.git`) this project to one's computer, unzip the downloaded archive, and at the command line inside the main folder (`mdgBookSVG7Kit` or `mdgBookSVG7Kit-main` directory) issue the following command (pre-requisites: `bash`, `abcmidi`, `abcm2ps`, `Ghostscript`, `Inkscape`, and `LaTeX`):
 
 ```shell
 bash HOWTO
